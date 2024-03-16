@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const router = Router();
+const authController = require('../controllers/authController');
 
-router.get('/users', (req, res, next) => {
-  res.send('users')
-})
+
+router.get('/users', authController.getAllUser)
 
 router.get('/register', (req, res) => {
   res.send('register')
