@@ -14,8 +14,21 @@ module.exports.getAllUser = async (req, res) => {
       res.status(404).send("User not found")
     }
   }
-
   catch (err) {
     res.status(400).send(err);
+  }
+}
+
+
+
+module.exports.createUser = async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const user = await User.create({ name, email, password })
+    console.log("user created", user)
+  }
+
+  catch (err) {
+    console.log(err)
   }
 }

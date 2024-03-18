@@ -3,8 +3,10 @@ const app = express();
 const port = process.env.PORT || 5001
 const authRoutes = require('./routes/authRoute')
 const dotenv = require("dotenv").config();
+const connectDb = require('./config/db')
 
 
+connectDb();
 
 app.get('/', (req, res) => {
   res.send("hello")

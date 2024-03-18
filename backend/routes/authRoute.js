@@ -5,9 +5,6 @@ const authController = require('../controllers/authController');
 
 router.get('/users', authController.getAllUser)
 
-router.get('/register', (req, res) => {
-  res.send('register')
-})
-
+router.post('/register', authController.createUser)
 
 module.exports = router;
