@@ -19,18 +19,18 @@ module.exports.getAllUser = async (req, res) => {
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
   jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: maxAge
-  })
-}
+    expiresIn: maxAge,
+  });
+};
 
 module.exports.createUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const saltRounds = 10
+    const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     // const encryptedPassword = await bcrypt.hash(salt, password);
     const token = createToken(User._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     const user = await User.create({ name, email, password: password });
     console.log('user created', user);
     res.status(201).json(user);
@@ -62,5 +62,20 @@ module.exports.loginUser = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+  }
+};
+
+module.exports.logoutUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.status(200);
+      res.cookie('jwt', '', { maxAge: 1 });
+      res.send('User logged out.');
+    } else {
+      res.status(400).send('User not found');
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
 };
