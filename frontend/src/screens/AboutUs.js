@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbarr from '../components/Navbar'
 
 function AboutUs() {
   return (
-    <div>AboutUs</div>
+    <>
+      <Navbarr></Navbarr>
+    </>
   )
 }
 

@@ -1,8 +1,12 @@
 import React from 'react'
+import Navbarr from '../components/Navbar'
+
 
 function Support() {
   return (
-    <div>Support</div>
+    <>
+      <Navbarr></Navbarr>
+    </>
   )
 }
 

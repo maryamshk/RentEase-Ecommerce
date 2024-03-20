@@ -9,7 +9,7 @@ function Navbarr() {
     <>
       <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="/home">Home</Navbar.Brand>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/product">Product</Nav.Link>
             <Nav.Link href="/aboutus">About Us</Nav.Link>

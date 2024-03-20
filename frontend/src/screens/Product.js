@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbarr from '../components/Navbar'
 
 function Product() {
   return (
-    <div>Product</div>
+    <>
+      <Navbarr></Navbarr>
+    </>
   )
 }
 
