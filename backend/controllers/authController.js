@@ -1,6 +1,7 @@
 const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator')
 
 module.exports.getAllUser = async (req, res) => {
   try {
@@ -25,13 +26,18 @@ const createToken = (id) => {
 
 module.exports.createUser = async (req, res) => {
   const { name, email, password } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-    // const encryptedPassword = await bcrypt.hash(salt, password);
+    const encryptedPassword = await bcrypt.hash(password, salt);
     const token = createToken(User._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    const user = await User.create({ name, email, password: password });
+    const user = await User.create({ name, email, password: encryptedPassword });
     console.log('user created', user);
     res.status(201).json(user);
   } catch (err) {
