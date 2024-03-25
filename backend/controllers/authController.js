@@ -48,26 +48,30 @@ module.exports.createUser = async (req, res) => {
 module.exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email && !password) {
+      res.json('Email and password is required');
+    }
+
     if (!email) {
-      res.send('Email is required');
+      res.json('Email is required');
     }
 
     if (!password) {
-      res.send('Password is required');
-    }
-
-    if (!email && !password) {
-      res.send('Email and password is required');
+      res.json('Password is required');
     }
 
     const user = await User.findOne({ email });
     if (user) {
       res.status(200).send(user);
+      res.json({ success: true })
     } else {
-      res.status(400).send('user not found');
+      res.status(404).json('No user found');
     }
   } catch (err) {
     console.log(err);
+    res.status(500).send('Server Error');
+    res.json({ success: false });
+
   }
 };
 
@@ -79,9 +83,9 @@ module.exports.logoutUser = async (req, res) => {
       res.cookie('jwt', '', { maxAge: 1 });
       res.send('User logged out.');
     } else {
-      res.status(400).send('User not found');
+      res.status(400).send('No user found');
     }
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send('Server Error');
   }
 };

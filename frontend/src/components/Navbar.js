@@ -11,9 +11,8 @@ function Navbarr() {
         <Container>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/product">Product</Nav.Link>
-            <Nav.Link href="/aboutus">About Us</Nav.Link>
-            <Nav.Link href="/support">Support</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

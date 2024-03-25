@@ -1,9 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './screens/Home';
-import AboutUs from './screens/AboutUs';
-import Support from './screens/Support';
-import Product from './screens/Product';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+import SignUp from './screens/SignUp.js';
+import Login from './screens/Login.js'
 
 function App() {
   return (
@@ -11,9 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/product" element={<Product />} />
-          <Route exact path='aboutus' element={<AboutUs />} />
-          <Route exact path='support' element={<Support />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

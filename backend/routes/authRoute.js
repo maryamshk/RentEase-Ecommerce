@@ -13,7 +13,7 @@ router.post('/register',
     body('name').isLength({ min: 5 })
   ],
   authController.createUser)
-router.post('/login', authController.loginUser)
+router.post('/loginuser', authController.loginUser)
 router.get('/logout/:id', authController.logoutUser)
 
 module.exports = router;
